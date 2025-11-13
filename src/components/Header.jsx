@@ -79,9 +79,9 @@ const Header = () => {
             </button>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
-                <span className="text-sm font-medium text-emerald-700">JB</span>
+                <span className="text-sm font-medium text-emerald-700">SM</span>
               </div>
-              <span className="text-sm font-medium text-stone-700 hidden lg:inline">John Bailey</span>
+              <span className="text-sm font-medium text-stone-700 hidden lg:inline">Sarah Mitchell</span>
             </div>
           </div>
 
@@ -152,10 +152,10 @@ const Header = () => {
             <div className="pt-3 mt-3 border-t border-stone-200">
               <div className="flex items-center gap-3 px-4 py-2">
                 <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <span className="text-sm font-medium text-emerald-700">JB</span>
+                  <span className="text-sm font-medium text-emerald-700">SM</span>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-stone-900">John Bailey</p>
+                  <p className="text-sm font-medium text-stone-900">Sarah Mitchell</p>
                   <p className="text-xs text-stone-600">Procurement Manager</p>
                 </div>
               </div>

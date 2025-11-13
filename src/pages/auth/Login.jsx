@@ -43,7 +43,7 @@ const Login = () => {
       // Store auth token (mock)
       localStorage.setItem('nuturaa_auth', 'mock_token');
       localStorage.setItem('nuturaa_user', JSON.stringify({
-        name: 'John Bailey',
+        name: 'Sarah Mitchell',
         email: formData.email,
         organization: 'City Food Bank',
         role: 'Procurement Manager'

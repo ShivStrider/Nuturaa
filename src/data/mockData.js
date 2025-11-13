@@ -167,7 +167,9 @@ export const risks = [
     affectedProducts: ['Carrots', 'Lettuce', 'Tomatoes'],
     date: '2025-11-10',
     region: 'California',
-    impact: 'Price increases of 15-30% expected for affected crops'
+    impact: 'Price increases of 15-30% expected for affected crops',
+    recommendation: 'Purchase now before prices rise further',
+    probability: 85
   },
   {
     id: 'risk-2',
@@ -178,7 +180,9 @@ export const risks = [
     affectedProducts: ['Bananas'],
     date: '2025-11-12',
     region: 'United States',
-    impact: 'Limited supply, prices up 10-15%'
+    impact: 'Limited supply, prices up 10-15%',
+    recommendation: 'Increase watch on banana pricing',
+    probability: 72
   },
   {
     id: 'risk-3',
@@ -189,7 +193,9 @@ export const risks = [
     affectedProducts: ['Oranges', 'Grapefruits'],
     date: '2025-11-09',
     region: 'Florida',
-    impact: 'Reduced availability, higher prices expected'
+    impact: 'Reduced availability, higher prices expected',
+    recommendation: 'Source alternative suppliers',
+    probability: 78
   },
   {
     id: 'risk-4',
@@ -200,7 +206,9 @@ export const risks = [
     affectedProducts: ['Potatoes'],
     date: '2025-11-11',
     region: 'Pacific Northwest',
-    impact: 'Increased supply, stable to lower prices'
+    impact: 'Increased supply, stable to lower prices',
+    recommendation: 'Hold purchases for better pricing',
+    probability: 82
   },
   {
     id: 'risk-5',
@@ -211,7 +219,9 @@ export const risks = [
     affectedProducts: ['Tomatoes', 'Lettuce', 'Apples', 'Strawberries'],
     date: '2025-11-08',
     region: 'Multiple States',
-    impact: 'Delayed harvests, potential price volatility'
+    impact: 'Delayed harvests, potential price volatility',
+    recommendation: 'Purchase now to secure inventory',
+    probability: 88
   },
   {
     id: 'risk-6',
@@ -222,7 +232,9 @@ export const risks = [
     affectedProducts: ['Tomatoes', 'Peppers', 'Cucumbers'],
     date: '2025-11-07',
     region: 'Mexico/US Border',
-    impact: 'Price increases of 12-18% anticipated'
+    impact: 'Price increases of 12-18% anticipated',
+    recommendation: 'Buy before tariffs take effect',
+    probability: 95
   },
   {
     id: 'risk-7',
@@ -233,7 +245,9 @@ export const risks = [
     affectedProducts: ['Lettuce', 'Spinach', 'Leafy Greens'],
     date: '2025-11-12',
     region: 'California',
-    impact: 'Potential crop damage, supply concerns'
+    impact: 'Potential crop damage, supply concerns',
+    recommendation: 'Monitor closely for supply issues',
+    probability: 65
   },
   {
     id: 'risk-8',
@@ -244,7 +258,9 @@ export const risks = [
     affectedProducts: ['All Categories'],
     date: '2025-11-11',
     region: 'National',
-    impact: 'Modest downward pressure on prices'
+    impact: 'Modest downward pressure on prices',
+    recommendation: 'Negotiate lower delivery costs',
+    probability: 70
   },
   {
     id: 'risk-9',
@@ -255,7 +271,9 @@ export const risks = [
     affectedProducts: ['Apples'],
     date: '2025-11-06',
     region: 'Washington',
-    impact: 'Reduced quality, 10-15% yield loss expected'
+    impact: 'Reduced quality, 10-15% yield loss expected',
+    recommendation: 'Lock in pricing immediately',
+    probability: 80
   },
   {
     id: 'risk-10',
@@ -266,7 +284,9 @@ export const risks = [
     affectedProducts: ['Apples', 'Carrots', 'Potatoes'],
     date: '2025-11-10',
     region: 'Midwest',
-    impact: 'Potential supply bottlenecks'
+    impact: 'Potential supply bottlenecks',
+    recommendation: 'Coordinate deliveries in advance',
+    probability: 68
   }
 ];
 
