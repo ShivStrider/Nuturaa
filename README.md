@@ -12,7 +12,7 @@ A production-ready React application for food bank procurement managers to make 
 
 Food banks face volatile commodity prices (15-40% seasonal fluctuation) with limited budgets. Poor procurement timing leads to **$40K-120K in annual missed savings** per organization and 12-18% food waste. Nuturaa provides AI-powered price forecasting to optimize purchase timing and maximize budget efficiency.
 
-**Target Market**: 200+ large US food banks + 3,000+ regional/community food banks (Total Addressable Market: $2.5B-10B in annual procurement)
+**Target Market**: 200+ large food banks + 3,000+ regional/community food banks (Total Addressable Market: $2.5B-10B in annual procurement)
 
 ---
 
@@ -252,7 +252,7 @@ xl:      1280px+  (large desktop)
 ### Current Deployment
 
 **Platform**: Netlify
-**URL**: https://dulcet-moxie-25ade3.netlify.app/
+**URL**: https://nuturaa.netlify.app/
 **Process**: Automatic deploy on `git push origin main`
 
 ### Build Configuration
