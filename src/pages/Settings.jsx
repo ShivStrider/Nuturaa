@@ -7,6 +7,8 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState('watchlist');
   const [searchQuery, setSearchQuery] = useState('');
   const [watchlist, setWatchlist] = useState(products.slice(0, 4));
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
 
   // All available products
   const availableProducts = products.filter(
@@ -25,6 +27,49 @@ const Settings = () => {
 
   const removeFromWatchlist = (productId) => {
     setWatchlist(watchlist.filter(p => p.id !== productId));
+  };
+
+  // Drag and drop handlers
+  const handleDragStart = (e, index) => {
+    setDraggedItem(index);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    setDragOverIndex(index);
+  };
+
+  const handleDragLeave = () => {
+    setDragOverIndex(null);
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+
+    if (draggedItem === null || draggedItem === dropIndex) {
+      setDraggedItem(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const newWatchlist = [...watchlist];
+    const draggedProduct = newWatchlist[draggedItem];
+
+    // Remove from old position
+    newWatchlist.splice(draggedItem, 1);
+
+    // Insert at new position
+    newWatchlist.splice(dropIndex, 0, draggedProduct);
+
+    setWatchlist(newWatchlist);
+    setDraggedItem(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedItem(null);
+    setDragOverIndex(null);
   };
 
   return (
@@ -135,10 +180,22 @@ const Settings = () => {
 
                 {watchlist.length > 0 ? (
                   <div className="space-y-3">
-                    {watchlist.map(product => (
+                    {watchlist.map((product, index) => (
                       <div
                         key={product.id}
-                        className="flex items-center gap-4 p-4 bg-stone-50 rounded-lg hover:bg-stone-100 transition-colors group"
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, index)}
+                        onDragOver={(e) => handleDragOver(e, index)}
+                        onDragLeave={handleDragLeave}
+                        onDrop={(e) => handleDrop(e, index)}
+                        onDragEnd={handleDragEnd}
+                        className={`flex items-center gap-4 p-4 rounded-lg transition-all group ${
+                          draggedItem === index
+                            ? 'opacity-50 bg-stone-100'
+                            : dragOverIndex === index
+                            ? 'bg-emerald-50 border-2 border-emerald-600 border-dashed'
+                            : 'bg-stone-50 hover:bg-stone-100'
+                        }`}
                       >
                         {/* Drag Handle */}
                         <div className="cursor-grab active:cursor-grabbing">

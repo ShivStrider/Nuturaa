@@ -1,5 +1,6 @@
-import { Sprout, Bell } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.svg';
 
 const Header = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo - left-aligned */}
           <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <Sprout className="w-7 h-7 text-emerald-700" />
+            <img src={logo} alt="Nuturaa Logo" className="h-8 w-8" />
             <span className="text-xl font-semibold text-stone-900">
               Nuturaa
             </span>
