@@ -14,14 +14,14 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-stone-50">
-      <main className="max-w-7xl mx-auto px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Buy Alerts Section */}
         {buyAlerts.length > 0 && (
-          <section className="mb-8">
-            <div className="bg-amber-50 border-l-4 border-amber-600 rounded-lg p-6 shadow-sm">
+          <section className="mb-6 sm:mb-8">
+            <div className="bg-amber-50 border-l-4 border-amber-600 rounded-lg p-4 sm:p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
                 <AlertCircle className="w-5 h-5 text-amber-700" />
-                <h2 className="text-xl font-semibold text-amber-900">
+                <h2 className="text-lg sm:text-xl font-semibold text-amber-900">
                   Buy Recommendations
                 </h2>
               </div>
@@ -60,7 +60,7 @@ const Dashboard = () => {
                           <span className="text-sm text-stone-500">/{product.unit}</span>
                         </p>
                       </div>
-                      <button className="bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium px-4 py-2 rounded-md shadow-sm transition-all duration-200">
+                      <button className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-md shadow-sm transition-all duration-200 whitespace-nowrap">
                         View Forecast
                       </button>
                     </div>
@@ -71,11 +71,11 @@ const Dashboard = () => {
           </section>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Watchlist Section - 2 columns */}
           <section className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-semibold text-stone-900">My Watchlist</h2>
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl font-semibold text-stone-900">My Watchlist</h2>
               <Link
                 to="/settings"
                 className="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors"
@@ -147,9 +147,9 @@ const Dashboard = () => {
 
           {/* Market Risk Feed Sidebar - 1 column */}
           <aside className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-stone-200 p-6 sticky top-24">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-stone-900">Market Risks</h2>
+            <div className="bg-white rounded-lg shadow-sm border border-stone-200 p-4 sm:p-6 lg:sticky lg:top-24">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <h2 className="text-lg sm:text-xl font-semibold text-stone-900">Market Risks</h2>
                 <Link
                   to="/risks"
                   className="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors"

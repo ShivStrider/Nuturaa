@@ -77,34 +77,34 @@ const ForecastDetail = () => {
 
   return (
     <div className="min-h-screen bg-stone-50">
-      <main className="max-w-7xl mx-auto px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-sm mb-6">
-          <Link to="/" className="text-stone-600 hover:text-stone-900 transition-colors">
+        <div className="flex items-center gap-2 text-xs sm:text-sm mb-4 sm:mb-6 overflow-x-auto">
+          <Link to="/" className="text-stone-600 hover:text-stone-900 transition-colors whitespace-nowrap">
             Dashboard
           </Link>
-          <ChevronRight className="w-4 h-4 text-stone-400" />
-          <Link to="/forecasts" className="text-stone-600 hover:text-stone-900 transition-colors">
+          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-stone-400 flex-shrink-0" />
+          <Link to="/forecasts" className="text-stone-600 hover:text-stone-900 transition-colors whitespace-nowrap">
             Forecasts
           </Link>
-          <ChevronRight className="w-4 h-4 text-stone-400" />
-          <span className="text-stone-900 font-medium">{product.name}</span>
+          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-stone-400 flex-shrink-0" />
+          <span className="text-stone-900 font-medium whitespace-nowrap">{product.name}</span>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Chart Area - 2 columns */}
           <div className="lg:col-span-2 space-y-6">
             {/* Product Header */}
-            <div className="bg-white rounded-lg shadow-sm border border-stone-200 p-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-4xl">{product.emoji}</span>
+            <div className="bg-white rounded-lg shadow-sm border border-stone-200 p-4 sm:p-6">
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className="text-3xl sm:text-4xl">{product.emoji}</span>
                   <div>
-                    <h1 className="text-3xl font-semibold text-stone-900">
+                    <h1 className="text-2xl sm:text-3xl font-semibold text-stone-900">
                       {product.name}
                     </h1>
-                    <p className="text-sm text-stone-600">{product.category}</p>
+                    <p className="text-xs sm:text-sm text-stone-600">{product.category}</p>
                   </div>
                 </div>
                 <Badge variant={product.trend}>
@@ -119,16 +119,16 @@ const ForecastDetail = () => {
             </div>
 
             {/* Price Forecast Chart */}
-            <div className="bg-white rounded-lg shadow-sm border border-stone-200 p-8">
-              <h2 className="text-xl font-semibold text-stone-900 mb-6">
+            <div className="bg-white rounded-lg shadow-sm border border-stone-200 p-4 sm:p-6 lg:p-8">
+              <h2 className="text-lg sm:text-xl font-semibold text-stone-900 mb-4 sm:mb-6">
                 Price Forecast - Next 6 Months
               </h2>
 
-              <div className="h-96">
+              <div className="h-64 sm:h-80 lg:h-96">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     data={chartData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                    margin={{ top: 10, right: 5, left: -10, bottom: 5 }}
                   >
                     <defs>
                       <linearGradient id="confidenceGradient" x1="0" y1="0" x2="0" y2="1">
