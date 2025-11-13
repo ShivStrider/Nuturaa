@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { TrendingUp, TrendingDown, ChevronRight, AlertTriangle, AlertCircle, Clock, Target } from 'lucide-react';
+import { TrendingUp, TrendingDown, ChevronRight, AlertTriangle, Clock, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, ResponsiveContainer, Tooltip, ReferenceLine, Area, AreaChart } from 'recharts';
+import { LineChart, Line, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import { products, risks, getMiniChartData } from '../data/mockData';
 import Badge from '../components/ui/Badge';
 
@@ -19,28 +19,28 @@ const Dashboard = () => {
     .slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-stone-100">
+    <div className="min-h-screen bg-stone-50">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-5">
 
-        {/* CRITICAL ALERTS - Maximum prominence */}
+        {/* CRITICAL ALERTS - Professional amber-based design per design system */}
         {buyAlerts.length > 0 && (
           <section className="mb-4 sm:mb-6">
-            <div className="bg-gradient-to-r from-red-600 to-orange-600 rounded-lg p-3 sm:p-4 shadow-lg">
-              <div className="flex items-center gap-2 mb-3">
-                <AlertTriangle className="w-6 h-6 text-white" />
-                <h2 className="text-lg sm:text-xl font-bold text-white">
-                  URGENT: BUY NOW RECOMMENDATIONS
+            <div className="bg-amber-50 rounded-lg border-l-4 border-amber-600 p-4 sm:p-5 shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <AlertTriangle className="w-6 h-6 text-amber-700" />
+                <h2 className="text-lg sm:text-xl font-bold text-amber-900">
+                  Buy Recommendations — Action Required
                 </h2>
-                <span className="ml-auto bg-white/20 text-white text-xs font-semibold px-2 py-1 rounded">
-                  {buyAlerts.length} ACTION{buyAlerts.length > 1 ? 'S' : ''} REQUIRED
+                <span className="ml-auto bg-amber-900 text-amber-50 text-xs font-bold px-2.5 py-1 rounded">
+                  {buyAlerts.length} ITEM{buyAlerts.length > 1 ? 'S' : ''}
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {buyAlerts.map(product => (
                   <div
                     key={product.id}
-                    className="bg-white rounded-lg p-3 border-2 border-red-200"
+                    className="bg-white rounded-lg border border-amber-200 p-3 sm:p-4"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
@@ -50,46 +50,46 @@ const Dashboard = () => {
                             {product.name}
                           </h3>
                           <p className="text-xs font-semibold text-red-600">
-                            +{product.priceChangeValue}% in 30 days
+                            +{product.priceChangeValue}% (30 days)
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-red-50 rounded px-2 py-1.5 mb-2">
-                      <p className="text-xs font-medium text-stone-800">
+                    <div className="bg-amber-50 rounded px-2 py-2 mb-3 border border-amber-100">
+                      <p className="text-xs text-stone-700 leading-relaxed">
                         {product.recommendationText}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-3 pb-3 border-b border-stone-100">
                       <div>
-                        <p className="text-xs text-stone-500 font-medium">Current</p>
+                        <p className="text-xs text-stone-500 font-medium mb-0.5">Current</p>
                         <p className="text-lg font-bold font-mono text-stone-900">
                           ${product.currentPrice}
-                          <span className="text-xs text-stone-500">/{product.unit}</span>
+                          <span className="text-xs text-stone-500 font-sans">/{product.unit}</span>
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-xs text-stone-500 font-medium">30-day Est.</p>
+                        <p className="text-xs text-stone-500 font-medium mb-0.5">Est. 30-day</p>
                         <p className="text-lg font-bold font-mono text-red-600">
                           ${product.forecastPrice}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-3 h-3 text-stone-500" />
+                    <div className="flex items-center gap-2 mb-3">
+                      <Clock className="w-3.5 h-3.5 text-stone-500" />
                       <p className="text-xs text-stone-600">
-                        Buy by: <span className="font-semibold">{new Date(product.optimalWindow.end).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                        Buy by: <span className="font-bold text-stone-900">{new Date(product.optimalWindow.end).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                       </p>
                     </div>
 
                     <Link
                       to={`/forecast/${product.id}`}
-                      className="block mt-3 w-full bg-red-600 hover:bg-red-700 text-white text-sm font-bold py-2 px-3 rounded text-center transition-colors"
+                      className="block w-full bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium py-2.5 px-4 rounded-md text-center transition-colors shadow-sm"
                     >
-                      VIEW FULL FORECAST →
+                      View Forecast →
                     </Link>
                   </div>
                 ))}
@@ -101,196 +101,192 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
           {/* Watchlist Section - 2 columns */}
           <section className="lg:col-span-2">
-            <div className="bg-stone-50 rounded-lg p-3 sm:p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg sm:text-xl font-bold text-stone-900">Price Watchlist</h2>
-                <Link
-                  to="/settings"
-                  className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
-                >
-                  Manage →
-                </Link>
-              </div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg sm:text-xl font-bold text-stone-900">Price Watchlist</h2>
+              <Link
+                to="/settings"
+                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
+              >
+                Manage →
+              </Link>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {products.map(product => {
-                  const miniData = getMiniChartData(product.id);
-                  const isPositive = product.priceChangeValue > 0;
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+              {products.map(product => {
+                const miniData = getMiniChartData(product.id);
+                const isPositive = product.priceChangeValue > 0;
 
-                  return (
-                    <Link
-                      key={product.id}
-                      to={`/forecast/${product.id}`}
-                      className="bg-white rounded-lg border border-stone-200 p-3 hover:shadow-md hover:border-emerald-600 transition-all duration-150 cursor-pointer"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-xl">{product.emoji}</span>
-                          <div>
-                            <h3 className="text-sm font-bold text-stone-900">
-                              {product.name}
-                            </h3>
-                            <p className="text-xs text-stone-500">{product.category}</p>
-                          </div>
-                        </div>
-                        <Badge variant={product.recommendation === 'BUY_NOW' ? 'up' : product.recommendation === 'WAIT' ? 'down' : 'neutral'}>
-                          {product.recommendation === 'BUY_NOW' ? 'BUY' : product.recommendation === 'WAIT' ? 'WAIT' : 'MONITOR'}
-                        </Badge>
-                      </div>
-
-                      {/* Real mini chart with data points */}
-                      <div className="h-12 mb-2 -mx-1">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart data={miniData}>
-                            <defs>
-                              <linearGradient id={`gradient-${product.id}`} x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor={isPositive ? '#DC2626' : '#059669'} stopOpacity={0.2} />
-                                <stop offset="100%" stopColor={isPositive ? '#DC2626' : '#059669'} stopOpacity={0} />
-                              </linearGradient>
-                            </defs>
-                            <Area
-                              type="monotone"
-                              dataKey="price"
-                              stroke={isPositive ? '#DC2626' : '#059669'}
-                              strokeWidth={2}
-                              fill={`url(#gradient-${product.id})`}
-                              dot={{ r: 1.5, fill: isPositive ? '#DC2626' : '#059669' }}
-                            />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-
-                      <div className="flex items-end justify-between">
+                return (
+                  <Link
+                    key={product.id}
+                    to={`/forecast/${product.id}`}
+                    className="bg-white rounded-lg border border-stone-200 p-3 sm:p-4 hover:shadow-md hover:border-emerald-600 transition-all duration-150 cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl">{product.emoji}</span>
                         <div>
-                          <p className="text-xs font-semibold text-stone-500 mb-0.5">
-                            Current
-                          </p>
-                          <p className="text-xl font-bold font-mono text-stone-900">
-                            ${product.currentPrice}
-                            <span className="text-xs text-stone-500">/{product.unit}</span>
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xs font-semibold text-stone-500 mb-0.5">
-                            30-day
-                          </p>
-                          <div className="flex items-center gap-1">
-                            <span className={`text-sm font-bold ${isPositive ? 'text-red-600' : 'text-emerald-600'}`}>
-                              {product.priceChange}
-                            </span>
-                            {isPositive ? (
-                              <TrendingUp className="w-3 h-3 text-red-600" />
-                            ) : (
-                              <TrendingDown className="w-3 h-3 text-emerald-600" />
-                            )}
-                          </div>
+                          <h3 className="text-sm font-bold text-stone-900">
+                            {product.name}
+                          </h3>
+                          <p className="text-xs text-stone-500">{product.category}</p>
                         </div>
                       </div>
+                      <Badge variant={product.recommendation === 'BUY_NOW' ? 'up' : product.recommendation === 'WAIT' ? 'down' : 'neutral'}>
+                        {product.recommendation === 'BUY_NOW' ? 'BUY' : product.recommendation === 'WAIT' ? 'WAIT' : 'MONITOR'}
+                      </Badge>
+                    </div>
 
-                      {/* Forecast confidence */}
-                      <div className="mt-2 pt-2 border-t border-stone-100">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-stone-600">
-                            <Target className="w-3 h-3 inline mr-1" />
-                            Forecast: ${product.forecastPrice}
+                    {/* Real mini chart with data points */}
+                    <div className="h-12 mb-3 -mx-1">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={miniData}>
+                          <defs>
+                            <linearGradient id={`gradient-${product.id}`} x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="0%" stopColor={isPositive ? '#DC2626' : '#059669'} stopOpacity={0.15} />
+                              <stop offset="100%" stopColor={isPositive ? '#DC2626' : '#059669'} stopOpacity={0} />
+                            </linearGradient>
+                          </defs>
+                          <Area
+                            type="monotone"
+                            dataKey="price"
+                            stroke={isPositive ? '#DC2626' : '#059669'}
+                            strokeWidth={2}
+                            fill={`url(#gradient-${product.id})`}
+                            dot={{ r: 1.5, fill: isPositive ? '#DC2626' : '#059669' }}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-stone-500 mb-0.5">
+                          Current Price
+                        </p>
+                        <p className="text-xl font-bold font-mono text-stone-900">
+                          ${product.currentPrice}
+                          <span className="text-xs text-stone-500 font-sans">/{product.unit}</span>
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs font-semibold text-stone-500 mb-0.5">
+                          30-day Change
+                        </p>
+                        <div className="flex items-center gap-1">
+                          <span className={`text-sm font-bold font-mono ${isPositive ? 'text-red-600' : 'text-emerald-600'}`}>
+                            {product.priceChange}
                           </span>
-                          <span className="text-stone-500 font-mono">
-                            {product.confidence}% confidence
-                          </span>
+                          {isPositive ? (
+                            <TrendingUp className="w-3.5 h-3.5 text-red-600" />
+                          ) : (
+                            <TrendingDown className="w-3.5 h-3.5 text-emerald-600" />
+                          )}
                         </div>
                       </div>
-                    </Link>
-                  );
-                })}
-              </div>
+                    </div>
+
+                    {/* Forecast confidence */}
+                    <div className="mt-3 pt-3 border-t border-stone-100">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-stone-600 font-medium">
+                          <Target className="w-3 h-3 inline mr-1" />
+                          Forecast: <span className="font-mono font-semibold text-stone-900">${product.forecastPrice}</span>
+                        </span>
+                        <span className="text-stone-500">
+                          {product.confidence}% confidence
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </section>
 
           {/* Market Risk Feed Sidebar - 1 column */}
           <aside className="lg:col-span-1">
-            <div className="bg-stone-50 rounded-lg p-3 sm:p-4 lg:sticky lg:top-20">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg sm:text-xl font-bold text-stone-900">Active Risks</h2>
-                <Link
-                  to="/risks"
-                  className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
-                >
-                  View All
-                </Link>
-              </div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg sm:text-xl font-bold text-stone-900">Active Risks</h2>
+              <Link
+                to="/risks"
+                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
+              >
+                View All
+              </Link>
+            </div>
 
-              <div className="space-y-2.5">
-                {urgentRisks.map(risk => {
-                  const severityConfig = {
-                    High: {
-                      bg: 'bg-red-600',
-                      text: 'text-red-600',
-                      badgeBg: 'bg-red-100',
-                      label: 'HIGH'
-                    },
-                    Medium: {
-                      bg: 'bg-amber-600',
-                      text: 'text-amber-700',
-                      badgeBg: 'bg-amber-100',
-                      label: 'MED'
-                    },
-                    Low: {
-                      bg: 'bg-emerald-600',
-                      text: 'text-emerald-600',
-                      badgeBg: 'bg-emerald-100',
-                      label: 'LOW'
-                    }
-                  };
+            <div className="space-y-3">
+              {urgentRisks.map(risk => {
+                const severityConfig = {
+                  High: {
+                    borderColor: '#DC2626',
+                    badgeBg: 'bg-red-100',
+                    badgeText: 'text-red-700',
+                    label: 'HIGH'
+                  },
+                  Medium: {
+                    borderColor: '#D97706',
+                    badgeBg: 'bg-amber-100',
+                    badgeText: 'text-amber-700',
+                    label: 'MED'
+                  },
+                  Low: {
+                    borderColor: '#059669',
+                    badgeBg: 'bg-emerald-100',
+                    badgeText: 'text-emerald-700',
+                    label: 'LOW'
+                  }
+                };
 
-                  const config = severityConfig[risk.severity];
+                const config = severityConfig[risk.severity];
 
-                  return (
-                    <div
-                      key={risk.id}
-                      className="bg-white rounded-lg border-l-4 border-stone-200 p-2.5 hover:shadow-sm transition-shadow"
-                      style={{ borderLeftColor: config.bg.replace('bg-', '#') === 'bg-red-600' ? '#DC2626' : config.bg === 'bg-amber-600' ? '#D97706' : '#059669' }}
-                    >
-                      <div className="flex items-start gap-2 mb-1.5">
-                        <span className={`${config.badgeBg} ${config.text} text-xs font-bold px-1.5 py-0.5 rounded`}>
-                          {config.label}
-                        </span>
-                        <span className="text-xs text-stone-500">{risk.probability}%</span>
-                      </div>
-
-                      <p className="text-sm font-bold text-stone-900 mb-1 leading-tight">
-                        {risk.title}
-                      </p>
-
-                      <div className="mb-1.5">
-                        <p className="text-xs text-stone-600 font-medium">
-                          Impact: {risk.impact}
-                        </p>
-                      </div>
-
-                      <div className="bg-stone-50 rounded px-2 py-1 mb-1.5">
-                        <p className="text-xs font-semibold text-stone-700">
-                          → {risk.recommendation}
-                        </p>
-                      </div>
-
-                      {risk.affectedProducts.length > 0 && (
-                        <div className="flex flex-wrap gap-1">
-                          {risk.affectedProducts.slice(0, 3).map((product, idx) => (
-                            <span key={idx} className="text-xs bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded">
-                              {product}
-                            </span>
-                          ))}
-                          {risk.affectedProducts.length > 3 && (
-                            <span className="text-xs text-stone-500">
-                              +{risk.affectedProducts.length - 3} more
-                            </span>
-                          )}
-                        </div>
-                      )}
+                return (
+                  <div
+                    key={risk.id}
+                    className="bg-white rounded-lg border-l-4 p-3 hover:shadow-sm transition-shadow"
+                    style={{ borderLeftColor: config.borderColor }}
+                  >
+                    <div className="flex items-start gap-2 mb-2">
+                      <span className={`${config.badgeBg} ${config.badgeText} text-xs font-bold px-2 py-0.5 rounded`}>
+                        {config.label}
+                      </span>
+                      <span className="text-xs text-stone-500 font-mono">{risk.probability}%</span>
                     </div>
-                  );
-                })}
-              </div>
+
+                    <p className="text-sm font-bold text-stone-900 mb-2 leading-snug">
+                      {risk.title}
+                    </p>
+
+                    <div className="mb-2">
+                      <p className="text-xs text-stone-600 font-medium leading-relaxed">
+                        {risk.impact}
+                      </p>
+                    </div>
+
+                    <div className="bg-stone-50 rounded px-2 py-1.5 mb-2 border border-stone-100">
+                      <p className="text-xs font-semibold text-stone-700">
+                        → {risk.recommendation}
+                      </p>
+                    </div>
+
+                    {risk.affectedProducts.length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        {risk.affectedProducts.slice(0, 3).map((product, idx) => (
+                          <span key={idx} className="text-xs bg-stone-100 text-stone-600 px-1.5 py-0.5 rounded">
+                            {product}
+                          </span>
+                        ))}
+                        {risk.affectedProducts.length > 3 && (
+                          <span className="text-xs text-stone-500">
+                            +{risk.affectedProducts.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </aside>
         </div>
