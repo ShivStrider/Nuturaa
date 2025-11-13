@@ -1,6 +1,6 @@
 import { Bell } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/Frame 62.png';
+import logo from '../assets/logo-nuturaa.svg';
 
 const Header = () => {
   const location = useLocation();
