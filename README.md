@@ -2,7 +2,7 @@
 
 A production-ready React application for food bank procurement managers to make data-driven purchasing decisions through AI-powered price predictions and market risk monitoring.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dulcet-moxie-25ade3/deploy-status)](https://dulcet-moxie-25ade3.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/nuturaa/deploy-status)](https://nuturaa.netlify.app/)
 
 **Live Demo**: https://dulcet-moxie-25ade3.netlify.app/
 
