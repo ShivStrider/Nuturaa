@@ -4,7 +4,7 @@ A production-ready React application for food bank procurement managers to make 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/nuturaa/deploy-status)](https://nuturaa.netlify.app/)
 
-**Live Demo**: https://dulcet-moxie-25ade3.netlify.app/
+**Live Demo**: https://nuturaa.netlify.app/
 
 ---
 
