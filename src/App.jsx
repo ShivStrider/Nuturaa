@@ -7,11 +7,13 @@ import RiskMonitor from './pages/RiskMonitor';
 import Settings from './pages/Settings';
 import Login from './pages/auth/Login';
 import Onboarding from './pages/Onboarding';
+import ErrorBoundary from './components/ErrorBoundary';
+import { getStorageItem } from './utils/storage';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('nuturaa_auth');
-  const hasCompletedOnboarding = localStorage.getItem('nuturaa_onboarding_complete');
+  const isAuthenticated = getStorageItem('auth', null);
+  const hasCompletedOnboarding = getStorageItem('onboarding_complete', null);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -40,9 +42,10 @@ const Layout = ({ children }) => {
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
+    <ErrorBoundary>
+      <Router>
+        <Layout>
+          <Routes>
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/onboarding" element={<Onboarding />} />
@@ -91,6 +94,7 @@ function App() {
         </Routes>
       </Layout>
     </Router>
+    </ErrorBoundary>
   );
 }
 

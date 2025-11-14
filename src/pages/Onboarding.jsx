@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Check, Upload, Search, Bell, TrendingUp } from 'lucide-react';
 import { products } from '../data/mockData';
 import Badge from '../components/ui/Badge';
+import { setStorageItem } from '../utils/storage';
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -39,9 +40,9 @@ const Onboarding = () => {
   };
 
   const handleComplete = () => {
-    // Save onboarding completion
-    localStorage.setItem('nuturaa_onboarding_complete', 'true');
-    localStorage.setItem('nuturaa_watchlist', JSON.stringify(selectedProducts.map(p => p.id)));
+    // Save onboarding completion using safe storage utility
+    setStorageItem('onboarding_complete', true);
+    setStorageItem('watchlist', selectedProducts.map(p => p.id));
 
     // Navigate to dashboard
     navigate('/');

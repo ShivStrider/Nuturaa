@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Sprout, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { setStorageItem, getStorageItem } from '../../utils/storage';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,23 +41,25 @@ const Login = () => {
 
     // Simulate API call
     setTimeout(() => {
-      // Store auth token (mock)
-      localStorage.setItem('nuturaa_auth', 'mock_token');
-      localStorage.setItem('nuturaa_user', JSON.stringify({
+      // Store auth token (mock) using safe storage utility
+      setStorageItem('auth', 'mock_token');
+      setStorageItem('user', {
         name: 'Sarah Mitchell',
         email: formData.email,
         organization: 'City Food Bank',
         role: 'Procurement Manager'
-      }));
+      });
 
       // Check if user needs onboarding
-      const hasCompletedOnboarding = localStorage.getItem('nuturaa_onboarding_complete');
+      const hasCompletedOnboarding = getStorageItem('onboarding_complete', null);
 
       if (!hasCompletedOnboarding) {
         navigate('/onboarding');
       } else {
         navigate('/');
       }
+
+      setIsLoading(false);
     }, 1000);
   };
 

@@ -1,22 +1,28 @@
-import { useState } from 'react';
-import { TrendingUp, TrendingDown, ChevronRight, AlertTriangle, Clock, Target } from 'lucide-react';
+import { useMemo } from 'react';
+import { TrendingUp, TrendingDown, AlertTriangle, Clock, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { ResponsiveContainer, Area, AreaChart } from 'recharts';
 import { products, risks, getMiniChartData } from '../data/mockData';
 import Badge from '../components/ui/Badge';
 
 const Dashboard = () => {
-  // Get products with BUY_NOW recommendation for alerts
-  const buyAlerts = products.filter(p => p.recommendation === 'BUY_NOW');
+  // Memoize expensive computations to prevent unnecessary recalculations
+  const buyAlerts = useMemo(
+    () => products.filter(p => p.recommendation === 'BUY_NOW'),
+    []
+  );
 
   // Get high and medium severity risks, sorted by severity
-  const urgentRisks = risks
-    .filter(r => r.severity === 'High' || r.severity === 'Medium')
-    .sort((a, b) => {
-      const severityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
-      return severityOrder[b.severity] - severityOrder[a.severity];
-    })
-    .slice(0, 6);
+  const urgentRisks = useMemo(
+    () => risks
+      .filter(r => r.severity === 'High' || r.severity === 'Medium')
+      .sort((a, b) => {
+        const severityOrder = { 'High': 3, 'Medium': 2, 'Low': 1 };
+        return severityOrder[b.severity] - severityOrder[a.severity];
+      })
+      .slice(0, 6),
+    []
+  );
 
   return (
     <div className="min-h-screen bg-stone-50">
@@ -24,14 +30,14 @@ const Dashboard = () => {
 
         {/* CRITICAL ALERTS - Professional amber-based design per design system */}
         {buyAlerts.length > 0 && (
-          <section className="mb-4 sm:mb-6">
-            <div className="bg-amber-50 rounded-lg border-l-4 border-amber-600 p-4 sm:p-5 shadow-sm">
+          <section className="mb-4 sm:mb-6" aria-labelledby="buy-alerts-heading" role="region">
+            <div className="bg-amber-50 rounded-lg border-l-4 border-amber-600 p-4 sm:p-5 shadow-sm" role="alert">
               <div className="flex items-center gap-2 mb-4">
-                <AlertTriangle className="w-6 h-6 text-amber-700" />
-                <h2 className="text-lg sm:text-xl font-bold text-amber-900">
+                <AlertTriangle className="w-6 h-6 text-amber-700" aria-hidden="true" />
+                <h2 id="buy-alerts-heading" className="text-lg sm:text-xl font-bold text-amber-900">
                   Buy Recommendations — Action Required
                 </h2>
-                <span className="ml-auto bg-amber-900 text-amber-50 text-xs font-bold px-2.5 py-1 rounded">
+                <span className="ml-auto bg-amber-900 text-amber-50 text-xs font-bold px-2.5 py-1 rounded" aria-label={`${buyAlerts.length} urgent ${buyAlerts.length > 1 ? 'items' : 'item'} requiring action`}>
                   {buyAlerts.length} ITEM{buyAlerts.length > 1 ? 'S' : ''}
                 </span>
               </div>
@@ -79,15 +85,16 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center gap-2 mb-3">
-                      <Clock className="w-3.5 h-3.5 text-stone-500" />
+                      <Clock className="w-3.5 h-3.5 text-stone-500" aria-hidden="true" />
                       <p className="text-xs text-stone-600">
-                        Buy by: <span className="font-bold text-stone-900">{new Date(product.optimalWindow.end).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                        Buy by: <time dateTime={product.optimalWindow.end} className="font-bold text-stone-900">{new Date(product.optimalWindow.end).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</time>
                       </p>
                     </div>
 
                     <Link
                       to={`/forecast/${product.id}`}
-                      className="block w-full bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium py-2.5 px-4 rounded-md text-center transition-colors shadow-sm"
+                      className="block w-full bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-medium py-2.5 px-4 rounded-md text-center transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+                      aria-label={`View detailed forecast for ${product.name}`}
                     >
                       View Forecast →
                     </Link>
@@ -100,12 +107,13 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
           {/* Watchlist Section - 2 columns */}
-          <section className="lg:col-span-2">
+          <section className="lg:col-span-2" aria-labelledby="watchlist-heading">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg sm:text-xl font-bold text-stone-900">Price Watchlist</h2>
+              <h2 id="watchlist-heading" className="text-lg sm:text-xl font-bold text-stone-900">Price Watchlist</h2>
               <Link
                 to="/settings"
-                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
+                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 rounded"
+                aria-label="Manage watchlist products"
               >
                 Manage →
               </Link>
@@ -120,7 +128,8 @@ const Dashboard = () => {
                   <Link
                     key={product.id}
                     to={`/forecast/${product.id}`}
-                    className="bg-white rounded-lg border border-stone-200 p-3 sm:p-4 hover:shadow-md hover:border-emerald-600 transition-all duration-150 cursor-pointer"
+                    className="bg-white rounded-lg border border-stone-200 p-3 sm:p-4 hover:shadow-md hover:border-emerald-600 transition-all duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2"
+                    aria-label={`View ${product.name} price forecast - Current: $${product.currentPrice}, ${isPositive ? 'Rising' : 'Falling'} ${Math.abs(product.priceChangeValue)}%`}
                   >
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
@@ -138,7 +147,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Real mini chart with data points */}
-                    <div className="h-12 mb-3 -mx-1">
+                    <div className="h-12 mb-3 -mx-1" role="img" aria-label={`Price trend chart for ${product.name} showing ${isPositive ? 'upward' : 'downward'} movement`}>
                       <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={miniData}>
                           <defs>
@@ -205,12 +214,13 @@ const Dashboard = () => {
           </section>
 
           {/* Market Risk Feed Sidebar - 1 column */}
-          <aside className="lg:col-span-1">
+          <aside className="lg:col-span-1" aria-labelledby="risks-heading">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg sm:text-xl font-bold text-stone-900">Active Risks</h2>
+              <h2 id="risks-heading" className="text-lg sm:text-xl font-bold text-stone-900">Active Risks</h2>
               <Link
                 to="/risks"
-                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors"
+                className="text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 rounded"
+                aria-label="View all market risks"
               >
                 View All
               </Link>
