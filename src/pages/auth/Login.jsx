@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sprout, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { setStorageItem, getStorageItem } from '../../utils/storage';
+import logo from '../../assets/logo-nuturaa.svg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -77,8 +78,8 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Logo & Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-xl mb-4">
-            <Sprout className="w-8 h-8 text-emerald-700" />
+          <div className="inline-flex items-center justify-center mb-4">
+            <img src={logo} alt="Nuturaa Logo" className="h-16 w-16" />
           </div>
           <h1 className="text-3xl font-semibold text-stone-900 mb-2">
             Welcome to Nuturaa
