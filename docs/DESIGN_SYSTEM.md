@@ -118,19 +118,19 @@ Charts and visualizations are primary UI elements. They must be clear, readable,
 
 ### Font Families
 
-**Headers & Body:** Work Sans
+**Primary Font:** Plus Jakarta Sans (Gilroy-style professional alternative)
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-font-family: 'Work Sans', sans-serif;
+font-family: 'Plus Jakarta Sans', sans-serif;
 ```
 
-**Data & Numbers:** IBM Plex Mono
-```css
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
-font-family: 'IBM Plex Mono', monospace;
-```
+**Rationale:** Plus Jakarta Sans is a professional, geometric sans-serif font that provides:
+- Modern, clean aesthetic similar to Gilroy
+- Excellent readability across all sizes
+- Professional appearance for enterprise applications
+- Superior number legibility for data-heavy interfaces
+- Consistent weight distribution across all font weights
 
 ### Type Scale
 
@@ -164,10 +164,18 @@ font-family: 'IBM Plex Mono', monospace;
 
 ```css
 font-weight: 400;  /* Normal - Body text */
-font-weight: 500;  /* Medium - Subheadings */
+font-weight: 500;  /* Medium - Subheadings, secondary info */
 font-weight: 600;  /* Semibold - Headings */
-font-weight: 700;  /* Bold - Display text */
+font-weight: 700;  /* Bold - Primary headings, emphasis */
+font-weight: 800;  /* Extra Bold - Hero text, major headings */
 ```
+
+**Usage Guidelines:**
+- Body text: 400
+- Labels and secondary text: 500
+- Section headings: 600
+- Page headings and important data: 700
+- Hero sections and primary headings: 800
 
 ### Responsive Typography
 

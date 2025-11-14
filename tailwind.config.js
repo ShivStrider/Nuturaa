@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Work Sans', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
+        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        mono: ['Plus Jakarta Sans', 'sans-serif'],
       },
       colors: {
         emerald: {
